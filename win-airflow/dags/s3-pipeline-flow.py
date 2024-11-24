@@ -1,6 +1,5 @@
 
 from airflow.models.dag import DAG
-from airflow.operators.bash import BashOperator
 from datetime import datetime, timedelta
 from airflow.operators.python import PythonOperator
 import boto3 
@@ -8,7 +7,7 @@ from airflow.models import Variable
 
 s3=boto3.resource(
         service_name='s3',
-        region_name='ap-south-1',
+        region_name=Variable.get("s3_region_name"),
         aws_access_key_id=Variable.get("aws-access-key-id"),
         aws_secret_access_key=Variable.get("aws-access-key")
     )
